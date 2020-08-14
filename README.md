@@ -144,7 +144,7 @@ Completing this tutorial should take about 30 minutes.
 
 - Make a `POST` to `<eddi-url>/regulardictionarystore/regulardictionaries` with a JSON in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
+>NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`, make sure you select the following parameters:
     1. Select the request type to be `POST`
@@ -209,7 +209,7 @@ Completing this tutorial should take about 30 minutes.
 
 - Make a `POST` to `<eddi-url>/behaviorstore/behaviorsets` with a JSON in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
+>NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`, make sure you select the following parameters:
     1. Select the request type to be `POST`
@@ -470,7 +470,7 @@ Completing this tutorial should take about 30 minutes.
 
 - Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
+>NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/outputstore/outputsets`, make sure you select the following parameters:
     1. Select the request type to be `POST`
@@ -825,7 +825,7 @@ Completing this tutorial should take about 30 minutes.
 
 - Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
+>NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
     1. Select the request type to be `POST`
@@ -916,7 +916,7 @@ Completing this tutorial should take about 30 minutes.
 
 - Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
+>NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
     1. Select the request type to be `POST`
