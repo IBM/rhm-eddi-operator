@@ -147,11 +147,11 @@ Completing this tutorial should take about 30 minutes.
 >NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`, make sure you select the following parameters:
-    1.Select the request type to be `POST`
-    2.Select `Body`
-    3.Select `raw`
-    4.Select type as `JSON`
-    5.Copy and paste the JSON body given below
+    1. Select the request type to be `POST`
+    2. Select `Body`
+    3. Select `raw`
+    4. Select type as `JSON`
+    5. Copy and paste the JSON body given below
     ```json
     {
         "words": [
@@ -196,8 +196,8 @@ Completing this tutorial should take about 30 minutes.
     ```
     - Click on `Send` button to make request
     - On successful request you can see a status: `201 Created` in your postman
-    6.Click on the `Headers` to view the response
-    7.You can see a `Location` header with a URL something like `eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<UNIQUE_DICTIONARY_VERSION>`. Make a note of the `<UNIQUE_DICTIONARY_ID>` as shown. 
+    6. Click on the `Headers` to view the response
+    7. You can see a `Location` header with a URL something like `eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<UNIQUE_DICTIONARY_VERSION>`. Make a note of the `<UNIQUE_DICTIONARY_ID>` as shown. 
 
 ![](doc/source/images/regulardictionary.png)
 
@@ -212,11 +212,11 @@ Completing this tutorial should take about 30 minutes.
 >NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`, make sure you select the following parameters:
-    1.Select the request type to be `POST`
-    2.Select `Body`
-    3.Select `raw`
-    4.Select type as `JSON`
-    5.Copy and paste the JSON body given below
+    1. Select the request type to be `POST`
+    2. Select `Body`
+    3. Select `raw`
+    4. Select type as `JSON`
+    5. Copy and paste the JSON body given below
     ```json
     {
         "behaviorGroups": [
@@ -457,8 +457,8 @@ Completing this tutorial should take about 30 minutes.
     ```
     - Click on `Send` button to make request
     - On successful request you can see a status: `201 Created` in your postman
-    6.Click on the `Headers` to view the response
-    7.You can see a `Location` header with a URL something like `eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>`. Make a note of the `<UNIQUE_BEHAVIOR_ID>` as shown. 
+    6. Click on the `Headers` to view the response
+    7. You can see a `Location` header with a URL something like `eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>`. Make a note of the `<UNIQUE_BEHAVIOR_ID>` as shown. 
 
 ![](doc/source/images/behaviourrules.png)
 
@@ -473,11 +473,11 @@ Completing this tutorial should take about 30 minutes.
 >NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/outputstore/outputsets`, make sure you select the following parameters:
-    1.Select the request type to be `POST`
-    2.Select `Body`
-    3.Select `raw`
-    4.Select type as `JSON`
-    5.Copy and paste the JSON body given below
+    1. Select the request type to be `POST`
+    2. Select `Body`
+    3. Select `raw`
+    4. Select type as `JSON`
+    5. Copy and paste the JSON body given below
     ```json
     {
         "outputSet": [
@@ -812,8 +812,8 @@ Completing this tutorial should take about 30 minutes.
     ```
     - Click on `Send` button to make request
     - On successful request you can see a status: `201 Created` in your postman
-    6.Click on the `Headers` to view the response
-    7.You can see a `Location` header with a URL something like `eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>`. Make a note of the `<UNIQUE_OUTPUTSET_ID>` as shown. 
+    6. Click on the `Headers` to view the response
+    7. You can see a `Location` header with a URL something like `eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>`. Make a note of the `<UNIQUE_OUTPUTSET_ID>` as shown. 
 
 ![](doc/source/images/outputset.png)
 
@@ -828,11 +828,11 @@ Completing this tutorial should take about 30 minutes.
 >NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
-    1.Select the request type to be `POST`
-    2.Select `Body`
-    3.Select `raw`
-    4.Select type as `JSON`
-    5.Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
+    1. Select the request type to be `POST`
+    2. Select `Body`
+    3. Select `raw`
+    4. Select type as `JSON`
+    5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
     ```json
     {
     "packageExtensions": [
@@ -903,8 +903,8 @@ Completing this tutorial should take about 30 minutes.
     ```
     - Click on `Send` button to make request
     - On successful request you can see a status: `201 Created` in your postman
-    6.Click on the `Headers` to view the response
-    7.You can see a `Location` header with a URL something like `eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>`. Make a note of the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` as shown.
+    6. Click on the `Headers` to view the response
+    7. You can see a `Location` header with a URL something like `eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>`. Make a note of the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` as shown.
 
 ![](doc/source/images/package.png)
 
@@ -919,11 +919,11 @@ Completing this tutorial should take about 30 minutes.
 >NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 - In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
-    1.Select the request type to be `POST`
-    2.Select `Body`
-    3.Select `raw`
-    4.Select type as `JSON`
-    5.Copy and paste the JSON body given below replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4
+    1. Select the request type to be `POST`
+    2. Select `Body`
+    3. Select `raw`
+    4. Select type as `JSON`
+    5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4
     ```json
     {
     "packages": [
@@ -934,8 +934,8 @@ Completing this tutorial should take about 30 minutes.
     ```
     - Click on `Send` button to make request
     - On successful request you can see a status: `201 Created` in your postman
-    6.Click on the `Headers` to view the response
-    7.You can see a `Location` header with a URL something like `eddi://ai.labs.bot/botstore/bots/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`. Make a note of the `<UNIQUE_BOT_ID>` and `<BOT_VERSION>` as shown.
+    6. Click on the `Headers` to view the response
+    7. You can see a `Location` header with a URL something like `eddi://ai.labs.bot/botstore/bots/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`. Make a note of the `<UNIQUE_BOT_ID>` and `<BOT_VERSION>` as shown.
 
 ![](doc/source/images/createbot.png)
 
