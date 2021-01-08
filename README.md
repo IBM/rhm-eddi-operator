@@ -112,19 +112,16 @@ Completing this tutorial should take about 30 minutes.
 
 # Pre-requisites
 
-1. [Configure OpenShift Cluster(ROKS) with Red Hat Marketplace & Connect to the OpenShift Cluster in CLI (Command Line Interface)](#step-1-configure-openshift-clusterroks-with-red-hat-marketplace--connect-to-the-openshift-cluster-in-cli-command-line-interface)
-2. [Deploy E.D.D.I Operator on OpenShift cluster](#step-2-deploy-eddi-operator-on-openshift-cluster)
-3. [Create an instance]()
-4. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
-5. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). 
-6. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).
+1. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
+2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). 
+3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).
 
 # Steps
 
 ### Step 1: Configure OpenShift Cluster(ROKS) with Red Hat Marketplace & Connect to the OpenShift Cluster in CLI (Command Line Interface)
 
-- Refer the **first two steps** of the Tutorial to **Configure Openshift Cluster(ROKS) with Red Hat Marketplace** and **Connect to the Openshift Cluster in CLI (Command Line Interface)**
-    - Tutorial Link: <https://developer.ibm.com/tutorials/get-started-using-a-cockroachdb-operator-hosted-on-red-hat-marketplace>
+- Refer the Tutorial to **Configure Openshift Cluster(ROKS) with Red Hat Marketplace** and **Connect to the Openshift Cluster in CLI (Command Line Interface)**
+    - Tutorial Link: <https://developer.ibm.com/tutorials/configure-a-red-hat-openshift-cluster-with-red-hat-marketplace/>
 
 ### Step 2: Deploy E.D.D.I Operator on OpenShift cluster
 
