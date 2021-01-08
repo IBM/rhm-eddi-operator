@@ -112,20 +112,86 @@ Completing this tutorial should take about 30 minutes.
 
 # Pre-requisites
 
-1. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
-2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). 
-3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).
+1. [Configure OpenShift Cluster(ROKS) with Red Hat Marketplace & Connect to the OpenShift Cluster in CLI (Command Line Interface)]()
+2. [Deploy E.D.D.I Operator on OpenShift cluster]()
+3. [Create an instance]()
+4. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
+5. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). 
+6. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).
 
 # Steps
 
-### Step 1: Install the E.D.D.I Operator from Red Hat Marketplace on OpenShift Cluster
+### Step 1: Configure OpenShift Cluster(ROKS) with Red Hat Marketplace & Connect to the OpenShift Cluster in CLI (Command Line Interface)
 
-- Steps to Deploy E.D.D.I Operator from Red Hat Marketplace on a OpenShift Cluster can be found here,
-  - [Steps to Deploy E.D.D.I Operator](https://github.com/IBM/rhm-eddi-operator-deployment-steps)
+- Refer the **first two steps** of the Tutorial to **Configure Openshift Cluster(ROKS) with Red Hat Marketplace** and **Connect to the Openshift Cluster in CLI (Command Line Interface)**
+    - Tutorial Link: <https://developer.ibm.com/tutorials/get-started-using-a-cockroachdb-operator-hosted-on-red-hat-marketplace>
 
-- Once you have successfully setup E.D.D.I Operator on OpenShift Cluster you will get an `URL` to access the E.D.D.I dashboard, make a note of the `URL` as it will be used in subsequent steps.
+### Step 2: Deploy E.D.D.I Operator on OpenShift cluster
 
-### Step 2: Create a chatbot in E.D.D.I
+- E.D.D.I is a Scalable Open Source Chatbot Platform to build multiple Chatbots with NLP, Behavior Rules, API Connector, and Templating. Developed in Java, provided with Docker, orchestrated with Kubernetes or Openshift.
+
+- Go to the [Marketplace catalog](https://marketplace.redhat.com/en-us) and search for E.D.D.I, Select `E.D.D.I` from the results as shown.
+
+![rhm](doc/source/images/rhmeddi.png)
+
+- The E.D.D.I product page gives you an overview, documentation, and pricing options associated with the product. Click on the `Free Trial` button as shown.
+
+![rhm-freetrial](doc/source/images/rhmeddifreetrial.png)
+
+- Next, the purchase summary will show the `Subscription term` and total cost is $0.00. Click `Start trial` as shown.
+
+![rhm-starttrial](doc/source/images/rhmstarttrial.png)
+
+> You can visit [Workspace > My Software](https://marketplace.redhat.com/en-us/workspace/software) to view your list of purchased softwares.
+
+- Back in the **web dashboard**, select the **E.D.D.I tile** and then select the **Operators tab**. Click on the `Install Operator` button. Leave the default selection for **Update channel** and **Approval strategy**. Select the cluster and namespace scope as `eddi-project` for the operator and click `Install`.
+
+![rhm-installoperator](doc/source/images/rhminstalloperator.png)
+
+- A message as shown below appears at the top of your screen indicating the install process initiated in the cluster.
+
+![rhm-successmsg](doc/source/images/rhmsuccessmsg.png)
+
+### Step 3: Create an instance
+
+- Log into your **OpenShift cluster** and look under `Operators > Installed Operators` to confirm the installation was successful.
+
+- The operator `E.D.D.I Operator` should list under the project/namespace `eddi-project` as shown.
+
+![ocp-installedoperators](doc/source/images/ocpinstalledoperators.png)
+
+- Click on `E.D.D.I` operator, under **Provided API's**, click on the first `Create Instance` as shown.
+
+![ocp-createdbinstance](doc/source/images/ocpcreateinstance.png)
+
+- The **Create E.D.D.I** page will be displayed with the default YAML, edit the `storageclass_name` in the YAML file, and click on the `Create` button as shown. If the default YAML file is not visiblie you can copy paste the bellow YAML file replacing the `storageclass_name`.
+
+```yaml
+apiVersion: labs.ai/v1alpha1
+kind: Eddi
+metadata:
+  name: eddi
+spec:
+  size: 1
+  mongodb:
+    environment: prod
+    storageclass_name: <existing_storageclass>
+    storage_size: 20G
+```
+
+![ocp-createyaml](doc/source/images/ocpcreateyml.png)
+
+- E.D.D.I Operator pods should come up when the installation is completed.
+
+- Under the left panel click on `Networking` and select `Routes`, make sure you are in the `eddi-project` namesapace, you can now see the `eddi-route` with a URL as shown.
+
+![ocp-routes](doc/source/images/ocproutes.png)
+
+- You can now visit the URL to access the E.D.D.I Dashboard.
+
+![ocp-eddidashboard](doc/source/images/eddidashboard.png)
+
+### Step 4: Create a chatbot in E.D.D.I
 
 - Now, let's create a chatbot in E.D.D.I from scratch.
 
@@ -138,7 +204,7 @@ Completing this tutorial should take about 30 minutes.
 
 - In order to build a Chatbot with E.D.D.I, you will have to create a few configuration files and POST them to the corresponding REST APIs. You can use tools like [Postman](https://www.postman.com/downloads/) to make the API calls.
 
-#### Step 2.1: Create Regular Dictionary
+#### Step 4.1: Create Regular Dictionary
 
 - We create regular dictionaries in order to store custom words and phrases.
 
@@ -203,7 +269,7 @@ Completing this tutorial should take about 30 minutes.
 
 >Note: The `<UNIQUE_DICTIONARY_ID>` will be used in Packaging, please make a note of it.
 
-#### Step 2.2: Create Behavior Rules
+#### Step 4.2: Create Behavior Rules
 
 - Behavior Rules are Actions based on decision making with predefined as well as custom conditions.
 
@@ -464,7 +530,7 @@ Completing this tutorial should take about 30 minutes.
 
 >Note: The `<UNIQUE_BEHAVIOR_ID>` will be used in Packaging, please make a note of it.
 
-#### Step 2.3: Create Output Sets
+#### Step 4.3: Create Output Sets
 
 - Output is defined to answer the users request based on the results from the behavior rule execution.
 
@@ -819,7 +885,7 @@ Completing this tutorial should take about 30 minutes.
 
 >Note: The `<UNIQUE_OUTPUTSET_ID>` will be used in Packaging, please make a note of it.
 
-#### Step 2.4: Packaging
+#### Step 4.4: Packaging
 
 - Now we will align the just created `Tasks` in the Package.
 
@@ -910,7 +976,7 @@ Completing this tutorial should take about 30 minutes.
 
 >Note: The `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` will be used in creating a Bot, please make a note of it.
 
-#### Step 2.5: Create a Bot
+#### Step 4.5: Create a Bot
 
 - Finally we build a Bot to align different Packages and Channels.
 
@@ -941,7 +1007,7 @@ Completing this tutorial should take about 30 minutes.
 
 >Note: The `<UNIQUE_BOT_ID>` and `<BOT_VERSION>` will be used to check the status of the Bot, please make a note of it.
 
-#### Step 2.6: Check the status of Deployment
+#### Step 4.6: Check the status of Deployment
 
 - To check the deployment status of the chatbot, make a `GET` API call to `<eddi-url>/administration/unrestricted/deploymentstatus/<UNIQUE_BOT_ID>?version=<BOT_VERSION>` as shown.
 
@@ -951,7 +1017,7 @@ Completing this tutorial should take about 30 minutes.
 
 - As soon as the Bot is deployed and has `READY` status we can invoke it and start using.
 
-### Step 3: Access the E.D.D.I Dashboard to manage the chatbot
+### Step 5: Access the E.D.D.I Dashboard to manage the chatbot
 
 - Let us view the results of the commands we ran in the earlier steps via the `E.D.D.I Dashboard`. The Dashboard can be accessed by visiting the URL obtained in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
@@ -975,7 +1041,7 @@ Completing this tutorial should take about 30 minutes.
 
 ![](doc/source/images/openchatbot.png)
 
-### Step 4: Explore the Chatbot
+### Step 6: Explore the Chatbot
 
 - You can see the chatbot in action once you are in the chat window as shown.
 
