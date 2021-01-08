@@ -112,7 +112,7 @@ Completing this tutorial should take about 30 minutes.
 
 # Pre-requisites
 
-1. [Configure OpenShift Cluster(ROKS) with Red Hat Marketplace & Connect to the OpenShift Cluster in CLI (Command Line Interface)]()
+1. [Configure OpenShift Cluster(ROKS) with Red Hat Marketplace & Connect to the OpenShift Cluster in CLI (Command Line Interface)](#step-1-configure-openshift-clusterroks-with-red-hat-marketplace--connect-to-the-openshift-cluster-in-cli-command-line-interface)
 2. [Deploy E.D.D.I Operator on OpenShift cluster]()
 3. [Create an instance]()
 4. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
