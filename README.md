@@ -96,7 +96,7 @@ In this tutorial, we will learn how to build a chatbot that will assess your ris
 
 # About E.D.D.I Operator
 
-E.D.D.I is an Enterprise-Ready Chatbot Platform for creating, running and maintaining customizable chatbots. It Scales Out very well due to resource-oriented design & RESTful architecture. It has NLP Parser for matching user inputs as words and phrases even in case of spelling mistakes or missing spaces between words. It also has Behavior Rules for making decisions with predefined and custom conditions. [Learn more](https://marketplace.redhat.com/en-us/products/labsai).
+E.D.D.I is an Enterprise-Ready Chatbot Platform through which you can create, and maintain customizable chatbots. It has a resource-oriented design & RESTful architecture which is easy to scale. It has NLP Parser for matching user inputs as words and phrases. It also has Behavior Rules for making decisions with predefined and custom conditions. [Learn more](https://marketplace.redhat.com/en-us/products/labsai).
 
 # Learning objectives
 
