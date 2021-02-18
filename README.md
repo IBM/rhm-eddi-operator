@@ -55,21 +55,9 @@ related_links:           # OPTIONAL - Note: zero or more related links
     url:
     description:
 
-runtimes:               # OPTIONAL - Note: Select runtimes from the complete set of runtimes below. Do not create new runtimes. Only use runtimes specifically in use by your content.
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/runtimes.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
- # - "asp.net 5"
-
 series:                 # OPTIONAL
  - type:
    slug:
-
-services:               # OPTIONAL - Note: please select services from the complete set of services below. Do not create new services. Only use services specifically in use by your content.
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/services.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
-# - "blockchain"
 
 subtitle:  Use the E.D.D.I operator to build your chatbot
 tags:
@@ -81,22 +69,15 @@ tags:
 
 title:  Build a COVID-19 infection risk-assessment chatbot
 
-
-translators:             # OPTIONAL - Note: can be one or more
-  - name:
-    email:
-
-type: tutorial
-
 ---
 
 # Build a COVID-19 infection risk-assessment chatbot
 
-As Covid-19 numbers continue to rise, you might wonder about your chance of contracting the virus. In this tutorial, learn how to build a chatbot that will assess your risk of getting infected with Covid-19 using E.D.D.I Operator hosted on Red Hat Marketplace.
+As Covid-19 numbers continue to rise, you might wonder about your chance of contracting the virus. In this tutorial, learn how to build a chatbot that will assess your risk of getting infected with Covid-19 using the E.D.D.I Operator hosted on Red Hat Marketplace.
 
 # About the E.D.D.I operator
 
-E.D.D.I is an enterprise-ready chatbot platform that enables you to create and maintain customizable chatbots. It has a resource-oriented design and RESTful architecture which is easy to scale. A NLP Parser matches user inputs as words and phrases and Behavior Rules assist in making decisions with predefined and custom conditions. [Learn more](https://marketplace.redhat.com/en-us/products/labsai).
+E.D.D.I is an enterprise-ready chatbot platform that enables you to create and maintain customizable chatbots. It has a resource-oriented design and RESTful architecture which is easy to scale. A natural language processing parser matches user inputs as words and phrases and Behavior Rules assist in making decisions with predefined and custom conditions. [Learn more](https://marketplace.redhat.com/en-us/products/labsai).
 
 # Learning objectives
 
@@ -112,24 +93,27 @@ Completing this tutorial should take about 30 minutes.
 
 # Prerequisites
 
-1. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
-2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). 
-3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).
+To complete the steps in this tutorial, you need the following installed:
+
+1. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om)
+2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift)
+3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html)
+4. [Postman](https://www.postman.com/)
 
 ## Steps
 
 1. [Configure a Red Hat OpenShift Cluster with Red Hat Marketplace](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace)
 1. [Deploy a E.D.D.I operator to an OpenShift cluster](#-step-2-deploy-a-eddi-operator-to-an-openshift-cluster)
 1. [Create an instance](#-step-3-create-an-instance)
-1.
-1.
+1. [Create a chatbot in E.D.D.I](#-step-4-creat-a-chatbot-in-eddi)
+1. [Access the E.D.D.I Dashboard to manage the chatbot](#-step-5-access-the-eddi-dashboard-to-manage-the-chatbot)
 1. [Explore the chatbot](#-step-6-explore-the-chatbot)
 
-### Step 1. Configure a Red Hat OpenShift Cluster with Red Hat Marketplace
+## Step 1. Configure a Red Hat OpenShift Cluster with Red Hat Marketplace
 
 Follow the steps in this tutorial to confirgure a Red Hat OpenShift cluster and connect to the cluster using your command line interface (CLI): [Configure a Red Hat OpenShift cluster hosted on Red Hat Marketplace](https://developer.ibm.com/tutorials/configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-### Step 2. Deploy the E.D.D.I operator to an OpenShift cluster
+## Step 2. Deploy the E.D.D.I operator to an OpenShift cluster
 
 Follow these steps to deploy the E.D.D.I operator to an OpenShift cluster. 
 
@@ -155,7 +139,7 @@ Follow these steps to deploy the E.D.D.I operator to an OpenShift cluster.
 
     ![rhm-successmsg](images/rhmsuccessmsg.png)
 
-### Step 3: Create an instance
+## Step 3: Create an instance
 
 1. Log into your OpenShift cluster. From the left navigation, click **Operators** and select **Installed Operators** to confirm the installation was successful. You should see the E.D.D.I Operator listed under the project/namespace `eddi-project`.
 
@@ -192,11 +176,11 @@ Follow these steps to deploy the E.D.D.I operator to an OpenShift cluster.
 
     ![ocp-eddidashboard](images/eddidashboard.png)
 
-### Step 4: Create a chatbot in E.D.D.I
+## Step 4: Create a chatbot in E.D.D.I
 
 Now, let's create a chatbot in E.D.D.I from scratch.
 
-To create a chatbot, you will complete these steps: <!--EM: I feel like, at the very least, we need to link people to where they can learn more about these concepts (regular dictionary, behavior rules, output sets). Is this common vocab for developing chatbots? Why would readers need to develop these things? This feels so advanced and I'm worried about just dropping our readers into this without more explanatory text -->
+To create a chatbot, you will complete these steps:
 
 1. Create a regular dictionary
 1. Create behavior rules
@@ -206,21 +190,21 @@ To create a chatbot, you will complete these steps: <!--EM: I feel like, at the 
 
 In order to build a Chatbot with E.D.D.I, you will have to create a few configuration files and POST them to the corresponding REST APIs. You can use tools like [Postman](https://www.postman.com/downloads/) to make the API calls.
 
-#### Step 4.1: Create a regular dictionary
+### Step 4.1: Create a regular dictionary
 
-*Regular dictionaries* are used store custom words and phrases. <!--EM: We should clarify this. Is that in machine learning world? AI world?->
+*Regular dictionaries* are used store custom words and phrases in artifical intelligence systems.
 
-- Make a `POST` to `<eddi-url>/regulardictionarystore/regulardictionaries` with a JSON file in the body as follows. <--EM: Is this what is described below? And "in the body" of what?->
+- Make a `POST` to `<eddi-url>/regulardictionarystore/regulardictionaries` with a JSON file in the body as follows.
 
 >Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`. Make sure you select the following parameters: <!--EM: What is Postman? How do they get it? Should that in the prereq?-->
+In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`. Make sure you select the following parameters:
     
-    1. Select the request type to be `POST`
-    2. Select `Body`
-    3. Select `raw`
-    4. Select type as `JSON`
-    5. Copy and paste the JSON body given below
+   1. Select the request type to be `POST`
+   2. Select `Body`
+   3. Select `raw`
+   4. Select type as `JSON`
+   5. Copy and paste the JSON body given below
     
         ```json
         {
@@ -265,17 +249,17 @@ In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulard
         }
         ```
     
-    6. Click the **Send** button to make the request. If your request is sucessful, you will see a status: `201 Created` in your postman.
-    7. Click on the `Headers` to view the response
-    8. You can see a `Location` header with a URL something like `eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<UNIQUE_DICTIONARY_VERSION>`. Make a note of the `<UNIQUE_DICTIONARY_ID>` as shown. 
+   6. Click the **Send** button to make the request. If your request is sucessful, you will see a status: `201 Created` in your postman.
+   7. Click on the `Headers` to view the response
+   8. You can see a `Location` header with a URL something like `eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<UNIQUE_DICTIONARY_VERSION>`. Make a note of the `<UNIQUE_DICTIONARY_ID>` as shown. 
 
-    ![](doc/source/images/regulardictionary.png)
+    ![](images/regulardictionary.png)
 
 >Note: The `<UNIQUE_DICTIONARY_ID>` will be used to package the elements of the chatbot, so please make a note of it.
 
-#### Step 4.2: Create behavior rules
+### Step 4.2: Create behavior rules
 
-*Behavior rules* are actions that are based on decision-making with predefined as well as custom conditions. <!--EM: So, basically, behavior rules are rules that how the chatbot will respond to answers? or where they will look for answers or all of the above? When I read the current definition, I think: Whose decision-making?? the machines?-->
+*Behavior rules* are are a series of defined rules by the developer of the bot. These rules are used to answer to the queries asked by the user.
 
 To create behavior rules, you will make a `POST` to `<eddi-url>/behaviorstore/behaviorsets` with a JSON file in the body as follows.
 
@@ -283,11 +267,11 @@ To create behavior rules, you will make a `POST` to `<eddi-url>/behaviorstore/be
 
 In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Make sure you select the following parameters:
     
-    1. Select the request type to be `POST`
-    2. Select `Body`
-    3. Select `raw`
-    4. Select type as `JSON`
-    5. Copy and paste the JSON body given below
+   1. Select the request type to be `POST`
+   2. Select `Body`
+   3. Select `raw`
+   4. Select type as `JSON`
+   5. Copy and paste the JSON body given below
     
         ```json
         {
@@ -528,15 +512,15 @@ In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Ma
         }
         ```
     
-    6. Click the **Send** button to make the request. On successful requests, you can see a status: `201 Created` in your postman.
-    7. Click on the `Headers` to view the response.
-    8. You can see a `Location` header with a URL something like `eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>`. Make a note of the `<UNIQUE_BEHAVIOR_ID>` as shown. 
+   6. Click the **Send** button to make the request. If your request is successful, you will see a status: `201 Created` in your postman.
+   7. Click on the `Headers` to view the response.
+   8. You can see a `Location` header with a URL something like `eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>`. Make a note of the `<UNIQUE_BEHAVIOR_ID>` as shown. 
 
     ![](images/behaviourrules.png)
 
 >Note: The `<UNIQUE_BEHAVIOR_ID>` will be used in Packaging, please make a note of it.
 
-#### Step 4.3: Create output sets
+### Step 4.3: Create output sets
 
 *Output* is defined to answer the users' request based on the results from the behavior rule execution.
 
@@ -892,7 +876,7 @@ Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as 
 
 >Note: The `<UNIQUE_OUTPUTSET_ID>` will be used in Packaging, please make a note of it.
 
-#### Step 4.4: Packaging
+### Step 4.4: Packaging
 
 Now that you've created the dictionary, behavior rules, and output sets, you should align them in the package.
 
@@ -902,11 +886,11 @@ Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as f
 
 In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
     
-    1. Select the request type to be `POST`
-    2. Select `Body`
-    3. Select `raw`
-    4. Select type as `JSON`
-    5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
+   1. Select the request type to be `POST`
+   2. Select `Body`
+   3. Select `raw`
+   4. Select type as `JSON`
+   5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
    
    ```json
     {
@@ -986,7 +970,7 @@ In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make su
 
 >Note: The `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` will be used in creating a Bot, please make a note of it.
 
-#### Step 4.5: Create a chatbot
+### Step 4.5: Create a chatbot
 
 Now it's time to build a chatbot that will use the different packages and channels.
 
@@ -1019,7 +1003,7 @@ In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make su
 
 >Note: The `<UNIQUE_BOT_ID>` and `<BOT_VERSION>` will be used to check the status of the Bot, please make a note of it.
 
-#### Step 4.6: Check the status of the deployment
+### Step 4.6: Check the status of the deployment
 
 To check the deployment status of the chatbot, make a `GET` API call to `<eddi-url>/administration/unrestricted/deploymentstatus/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`.
 
@@ -1029,7 +1013,7 @@ You can expect a `NOT_FOUND`, `IN_PROGRESS`, `ERROR` and `READY` message to be r
 
 As soon as the chatbot is deployed and has a `READY` status, you can invoke it and start using it.
 
-### Step 5: Access the E.D.D.I Dashboard to manage the chatbot
+## Step 5: Access the E.D.D.I Dashboard to manage the chatbot
 
 1. To see the results of the commands you ran in the earlier steps, access the E.D.D.I dashboard using the URL you obtained in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
@@ -1037,7 +1021,7 @@ As soon as the chatbot is deployed and has a `READY` status, you can invoke it a
 
     ![](images/eddidashboard.png)
 
-1. In the Bot Manager,<!-EM: Is this in E.D.D.I dashboard?--> you can see the Conversation ID of the chatbot that you deployed through API calls.
+1. In the Bot Manager in your E.D.D.I dashboard, you can see the Conversation ID of the chatbot that you deployed through API calls.
 
     ![](images/dashboard2.png)
 
@@ -1053,7 +1037,7 @@ As soon as the chatbot is deployed and has a `READY` status, you can invoke it a
 
     ![](images/openchatbot.png)
 
-### Step 6: Explore the chatbot
+## Step 6: Explore the chatbot
 
 You can see the chatbot in action once you are in the chat window.
 
@@ -1063,11 +1047,11 @@ The chatbot asks you a set of standard questions to assess your risk of getting 
 
 ![](doc/source/images/sample-output2.png)
 
-# Summary
+## Summary
 
 We learn't how to create a chatbot with E.D.D.I Operator hosted on Red Hat Marketplace.
 
-# Reference
+## Reference
 
 You can refer the following documentation from [E.D.D.I labs](https://docs.labs.ai/) to learn more about the operator and its features.
 
