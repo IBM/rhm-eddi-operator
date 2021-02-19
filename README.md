@@ -55,24 +55,11 @@ related_links:           # OPTIONAL - Note: zero or more related links
     url:
     description:
 
-runtimes:               # OPTIONAL - Note: Select runtimes from the complete set of runtimes below. Do not create new runtimes. Only use runtimes specifically in use by your content.
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/runtimes.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
- # - "asp.net 5"
-
 series:                 # OPTIONAL
  - type:
    slug:
 
-services:               # OPTIONAL - Note: please select services from the complete set of services below. Do not create new services. Only use services specifically in use by your content.
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/services.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
-# - "blockchain"
-
-subtitle:               # REQUIRED
-
+subtitle:  Use the E.D.D.I operator to build your chatbot
 tags:
 # Please select tags from the complete set of tags below. Do not create new tags. Only use tags specifically targeted for your content. If your content could match all tags (for example cloud, hybrid, and on-prem) then do not tag it with those tags. Less is more.
 # For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/tags.yml
@@ -80,460 +67,466 @@ tags:
 # Example (remove the # to uncomment):
  # - "blockchain"
 
-title:                  # REQUIRED
-
-translators:             # OPTIONAL - Note: can be one or more
-  - name:
-    email:
-
-type: tutorial
+title:  Build a COVID-19 infection risk-assessment chatbot
 
 ---
 
-# Build a Risk of Covid-19 Infection assessment chatbot using E.D.D.I hosted on Red Hat Marketplace.
+# Build a COVID-19 infection risk-assessment chatbot
 
-In this tutorial, we will learn how to build a chatbot that will assess your risk of getting infected with Covid-19 using E.D.D.I Operator hosted on Red Hat Marketplace.
+As Covid-19 numbers continue to rise, you might wonder about your chance of contracting the virus. In this tutorial, learn how to build a chatbot that will assess your risk of getting infected with Covid-19 using the E.D.D.I Operator hosted on Red Hat Marketplace.
 
-# About E.D.D.I Operator
+# About the E.D.D.I operator
 
-E.D.D.I is an Enterprise-Ready Chatbot Platform through which you can create, and maintain customizable chatbots. It has a resource-oriented design & RESTful architecture which is easy to scale. It has NLP Parser for matching user inputs as words and phrases. It also has Behavior Rules for making decisions with predefined and custom conditions. [Learn more](https://marketplace.redhat.com/en-us/products/labsai).
+E.D.D.I is an enterprise-ready chatbot platform that enables you to create and maintain customizable chatbots. It has a resource-oriented design and RESTful architecture which is easy to scale. A natural language processing parser matches user inputs as words and phrases and Behavior Rules assist in making decisions with predefined and custom conditions. [Learn more](https://marketplace.redhat.com/en-us/products/labsai).
 
 # Learning objectives
 
-When you have completed this tutorial, you will understand how to:
+After completing this tutorial, you will understand how to:
 
-* Install E.D.D.I Operator from Red Hat Marketplace on a OpenShift Cluster
+* Install the E.D.D.I Operator from Red Hat Marketplace on an OpenShift cluster
 * Create an E.D.D.I chatbot instance
-* Build a chatbot from scratch with E.D.D.I Operator
+* Build a chatbot from scratch with the E.D.D.I operator
 
 # Estimated time
 
 Completing this tutorial should take about 30 minutes.
 
-# Pre-requisites
+# Prerequisites
 
-1. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
-2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). 
-3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).
+To complete the steps in this tutorial, you need the following installed:
 
-# Steps
+1. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om)
+2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift)
+3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html)
+4. [Postman](https://www.postman.com/)
 
-### Step 1: Configure OpenShift Cluster(ROKS) with Red Hat Marketplace & Connect to the OpenShift Cluster in CLI (Command Line Interface)
+## Steps
 
-- Refer the Tutorial to **Configure Openshift Cluster(ROKS) with Red Hat Marketplace** and **Connect to the Openshift Cluster in CLI (Command Line Interface)**
-    - Tutorial Link: <https://developer.ibm.com/tutorials/configure-a-red-hat-openshift-cluster-with-red-hat-marketplace/>
+1. [Configure a Red Hat OpenShift Cluster with Red Hat Marketplace](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace)
+1. [Deploy a E.D.D.I operator to an OpenShift cluster](#-step-2-deploy-a-eddi-operator-to-an-openshift-cluster)
+1. [Create an instance](#-step-3-create-an-instance)
+1. [Create a chatbot in E.D.D.I](#-step-4-creat-a-chatbot-in-eddi)
+1. [Access the E.D.D.I Dashboard to manage the chatbot](#-step-5-access-the-eddi-dashboard-to-manage-the-chatbot)
+1. [Explore the chatbot](#-step-6-explore-the-chatbot)
 
-### Step 2: Deploy E.D.D.I Operator on OpenShift cluster
+## Step 1. Configure a Red Hat OpenShift Cluster with Red Hat Marketplace
 
-- E.D.D.I is a Scalable Open Source Chatbot Platform to build multiple Chatbots with NLP, Behavior Rules, API Connector, and Templating. Developed in Java, provided with Docker, orchestrated with Kubernetes or Openshift.
+Follow the steps in this tutorial to confirgure a Red Hat OpenShift cluster and connect to the cluster using your command line interface (CLI): [Configure a Red Hat OpenShift cluster hosted on Red Hat Marketplace](https://developer.ibm.com/tutorials/configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-- Go to the [Marketplace catalog](https://marketplace.redhat.com/en-us) and search for E.D.D.I, Select `E.D.D.I` from the results as shown.
+## Step 2. Deploy the E.D.D.I operator to an OpenShift cluster
 
-![rhm](doc/source/images/rhmeddi.png)
+Follow these steps to deploy the E.D.D.I operator to an OpenShift cluster. 
 
-- The E.D.D.I product page gives you an overview, documentation, and pricing options associated with the product. Click on the `Free Trial` button as shown.
+1. Visit the [Red Hat Marketplace catalog](https://marketplace.redhat.com/en-us) and search for "E.D.D.I". Select `E.D.D.I` from the results as shown.
 
-![rhm-freetrial](doc/source/images/rhmeddifreetrial.png)
+    ![rhm](images/rhmeddi.png)
 
-- Next, the purchase summary will show the `Subscription term` and total cost is $0.00. Click `Start trial` as shown.
+1. The E.D.D.I product page gives you an overview, documentation, and pricing options associated with the product. Click the **Free Trial** button.
 
-![rhm-starttrial](doc/source/images/rhmstarttrial.png)
+    ![rhm-freetrial](images/rhmeddifreetrial.png)
 
-> You can visit [Workspace > My Software](https://marketplace.redhat.com/en-us/workspace/software) to view your list of purchased softwares.
+1. Next, the purchase summary will show the `Subscription term` and total cost is $0.00. Click **Start trial**.
 
-- Back in the **web dashboard**, select the **E.D.D.I tile** and then select the **Operators tab**. Click on the `Install Operator` button. Leave the default selection for **Update channel** and **Approval strategy**. Select the cluster and namespace scope as `eddi-project` for the operator and click `Install`.
+    ![rhm-starttrial](images/rhmstarttrial.png)
 
-![rhm-installoperator](doc/source/images/rhminstalloperator.png)
+    > You can visit [Workspace > My Software](https://marketplace.redhat.com/en-us/workspace/software) to view your list of purchased software.
 
-- A message as shown below appears at the top of your screen indicating the install process initiated in the cluster.
+1. Back in the web dashboard, select the E.D.D.I tile and click the **Operators tab**. Select the **Install Operator** button. Leave the default selection for Update channel and Approval strategy. Select the cluster and namespace scope as `eddi-project` for the operator, and click **Install**.
 
-![rhm-successmsg](doc/source/images/rhmsuccessmsg.png)
+    ![rhm-installoperator](images/rhminstalloperator.png)
 
-### Step 3: Create an instance
+1. You should see a message like the one below at the top of your screen, indicating the install process initiated in the cluster.
 
-- Log into your **OpenShift cluster** and look under `Operators > Installed Operators` to confirm the installation was successful.
+    ![rhm-successmsg](images/rhmsuccessmsg.png)
 
-- The operator `E.D.D.I Operator` should list under the project/namespace `eddi-project` as shown.
+## Step 3: Create an instance
 
-![ocp-installedoperators](doc/source/images/ocpinstalledoperators.png)
+1. Log into your OpenShift cluster. From the left navigation, click **Operators** and select **Installed Operators** to confirm the installation was successful. You should see the E.D.D.I Operator listed under the project/namespace `eddi-project`.
 
-- Click on `E.D.D.I` operator, under **Provided API's**, click on the first `Create Instance` as shown.
+    ![ocp-installedoperators](images/ocpinstalledoperators.png)
 
-![ocp-createdbinstance](doc/source/images/ocpcreateinstance.png)
+1. On the E.D.D.I. operator screen, navigate to Provided APIs and select the first **Create Instance**.
 
-- The **Create E.D.D.I** page will be displayed with the default YAML, edit the `storageclass_name` in the YAML file, and click on the `Create` button as shown. If the default YAML file is not visiblie you can copy paste the bellow YAML file replacing the `storageclass_name`.
+    ![ocp-createdbinstance](images/ocpcreateinstance.png)
 
-```yaml
-apiVersion: labs.ai/v1alpha1
-kind: Eddi
-metadata:
-  name: eddi
-spec:
-  size: 1
-  mongodb:
-    environment: prod
-    storageclass_name: <existing_storageclass>
-    storage_size: 20G
-```
+1. The E.D.D.I page displays with the default YAML. Edit the `storageclass_name` in the YAML file and click on the **Create** button. If the default YAML file is not visiblie, you can copy paste the bellow YAML file replacing the `storageclass_name`.
 
-![ocp-createyaml](doc/source/images/ocpcreateyml.png)
-
-- E.D.D.I Operator pods should come up when the installation is completed.
-
-- Under the left panel click on `Networking` and select `Routes`, make sure you are in the `eddi-project` namesapace, you can now see the `eddi-route` with a URL as shown.
-
-![ocp-routes](doc/source/images/ocproutes.png)
-
-- You can now visit the URL to access the E.D.D.I Dashboard.
-
-![ocp-eddidashboard](doc/source/images/eddidashboard.png)
-
-### Step 4: Create a chatbot in E.D.D.I
-
-- Now, let's create a chatbot in E.D.D.I from scratch.
-
-- The steps involved in creating a chatbot are as follows:
-    - Create a `Regular Dictionary`
-    - Create `Behavior Rules`
-    - Create `Output sets`
-    - `Packaging` it
-    - Create a `bot`
-
-- In order to build a Chatbot with E.D.D.I, you will have to create a few configuration files and POST them to the corresponding REST APIs. You can use tools like [Postman](https://www.postman.com/downloads/) to make the API calls.
-
-#### Step 4.1: Create Regular Dictionary
-
-- We create regular dictionaries in order to store custom words and phrases.
-
-- Make a `POST` to `<eddi-url>/regulardictionarystore/regulardictionaries` with a JSON in the body as follows.
-
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
-
-- In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`, make sure you select the following parameters:
-    1. Select the request type to be `POST`
-    2. Select `Body`
-    3. Select `raw`
-    4. Select type as `JSON`
-    5. Copy and paste the JSON body given below
-    ```json
-    {
-        "words": [
-            {
-                "word": "hello",
-                "expressions": "greeting(hello)",
-                "frequency": 0
-            },
-            {
-                "word": "hi",
-                "expressions": "greeting(hi)",
-                "frequency": 0
-            },
-            {
-                "word": "bye",
-                "expressions": "goodbye(bye)",
-                "frequency": 0
-            },
-            {
-                "word": "take test",
-                "expressions": "taketest(yes)",
-                "frequency": 0
-            },
-            {
-                "word": "thanks",
-                "expressions": "thanks(thanks)",
-                "frequency": 0
-            }
-        ],
-        "regExs": [],
-        "phrases": [
-            {
-                "phrase": "good afternoon",
-                "expressions": "greeting(good_afternoon)"
-            },
-            {
-                "phrase": "how are you",
-                "expressions": "how_are_you"
-            }
-        ]
-    }
+    ```yaml
+    apiVersion: labs.ai/v1alpha1
+    kind: Eddi
+    metadata:
+      name: eddi
+    spec:
+      size: 1
+      mongodb:
+        environment: prod
+        storageclass_name: <existing_storageclass>
+        storage_size: 20G
     ```
-    - Click on `Send` button to make request
-    - On successful request you can see a status: `201 Created` in your postman
-    6. Click on the `Headers` to view the response
-    7. You can see a `Location` header with a URL something like `eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<UNIQUE_DICTIONARY_VERSION>`. Make a note of the `<UNIQUE_DICTIONARY_ID>` as shown. 
 
-![](doc/source/images/regulardictionary.png)
+    ![ocp-createyaml](images/ocpcreateyml.png)
 
->Note: The `<UNIQUE_DICTIONARY_ID>` will be used in Packaging, please make a note of it.
+    E.D.D.I Operator pods should come up when the installation is completed.
 
-#### Step 4.2: Create Behavior Rules
+1. Under the left panel, select **Networking > Routes**. Make sure you are in the `eddi-project` namesapace. You should now see the `eddi-route` with a URL like the following: 
 
-- Behavior Rules are Actions based on decision making with predefined as well as custom conditions.
+    ![ocp-routes](images/ocproutes.png)
 
-- Make a `POST` to `<eddi-url>/behaviorstore/behaviorsets` with a JSON in the body as follows.
+1. You can now visit the URL to access the E.D.D.I Dashboard.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
+    ![ocp-eddidashboard](images/eddidashboard.png)
 
-- In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`, make sure you select the following parameters:
-    1. Select the request type to be `POST`
-    2. Select `Body`
-    3. Select `raw`
-    4. Select type as `JSON`
-    5. Copy and paste the JSON body given below
-    ```json
-    {
-        "behaviorGroups": [
-            {
-                "name": "Smalltalk",
-                "behaviorRules": [
-                    {
-                        "name": "Welcome",
-                        "actions": [
-                            "welcome"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "occurrence",
-                                "configs": {
-                                    "maxTimesOccurred": "0",
-                                    "behaviorRuleName": "Welcome"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Greeting",
-                        "actions": [
-                            "greet"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "greeting(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Taketest",
-                        "actions": [
-                            "taketest"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "taketest(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Symptom 1",
-                        "actions": [
-                            "symptomone",
-                            "CONVERSATION_END"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "symptomone(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Safe",
-                        "actions": [
-                            "safe",
-                            "CONVERSATION_END"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "safe(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Semi Safe",
-                        "actions": [
-                            "semisafe",
-                            "CONVERSATION_END"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "semisafe(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Semi Risk",
-                        "actions": [
-                            "semirisk",
-                            "CONVERSATION_END"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "semirisk(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Symptom 2",
-                        "actions": [
-                            "symptomtwo"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "symptomtwo(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Symptom 2a",
-                        "actions": [
-                            "symptomtwoa"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "symptomtwoa(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Symptom 2b",
-                        "actions": [
-                            "symptomtwob"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "symptomtwob(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Symptom 2c",
-                        "actions": [
-                            "symptomtwoc"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "symptomtwoc(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Symptom 3",
-                        "actions": [
-                            "symptomthree"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "symptomthree(*)",
-                                    "occurrence": "currentStep"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Goodbye",
-                        "actions": [
-                            "say_goodbye",
-                            "CONVERSATION_END"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "goodbye(*)"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Thank",
-                        "actions": [
-                            "thank"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "thank(*)"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "how are you",
-                        "actions": [
-                            "how_are_you"
-                        ],
-                        "conditions": [
-                            {
-                                "type": "inputmatcher",
-                                "configs": {
-                                    "expressions": "how_are_you"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-    ```
-    - Click on `Send` button to make request
-    - On successful request you can see a status: `201 Created` in your postman
-    6. Click on the `Headers` to view the response
-    7. You can see a `Location` header with a URL something like `eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>`. Make a note of the `<UNIQUE_BEHAVIOR_ID>` as shown. 
+## Step 4: Create a chatbot in E.D.D.I
 
-![](doc/source/images/behaviourrules.png)
+Now, let's create a chatbot in E.D.D.I from scratch.
+
+To create a chatbot, you will complete these steps:
+
+1. Create a regular dictionary
+1. Create behavior rules
+1. Create output sets
+1. Package your dictionary, rules, and sets
+1. Create a chatbot
+
+In order to build a Chatbot with E.D.D.I, you will have to create a few configuration files and POST them to the corresponding REST APIs. You can use tools like [Postman](https://www.postman.com/downloads/) to make the API calls.
+
+### Step 4.1: Create a regular dictionary
+
+*Regular dictionaries* are used store custom words and phrases in artifical intelligence systems.
+
+- Make a `POST` to `<eddi-url>/regulardictionarystore/regulardictionaries` with a JSON file in the body as follows.
+
+>Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
+
+In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`. Make sure you select the following parameters:
+    
+   1. Select the request type to be `POST`
+   2. Select `Body`
+   3. Select `raw`
+   4. Select type as `JSON`
+   5. Copy and paste the JSON body given below
+    
+        ```json
+        {
+            "words": [
+                {
+                    "word": "hello",
+                    "expressions": "greeting(hello)",
+                    "frequency": 0
+                },
+                {
+                    "word": "hi",
+                    "expressions": "greeting(hi)",
+                    "frequency": 0
+                },
+                {
+                    "word": "bye",
+                    "expressions": "goodbye(bye)",
+                    "frequency": 0
+                },
+                {
+                    "word": "take test",
+                    "expressions": "taketest(yes)",
+                    "frequency": 0
+                },
+                {
+                    "word": "thanks",
+                    "expressions": "thanks(thanks)",
+                    "frequency": 0
+                }
+            ],
+            "regExs": [],
+            "phrases": [
+                {
+                    "phrase": "good afternoon",
+                    "expressions": "greeting(good_afternoon)"
+                },
+                {
+                    "phrase": "how are you",
+                    "expressions": "how_are_you"
+                }
+            ]
+        }
+        ```
+    
+   6. Click the **Send** button to make the request. If your request is sucessful, you will see a status: `201 Created` in your postman.
+   7. Click on the `Headers` to view the response
+   8. You can see a `Location` header with a URL something like `eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<UNIQUE_DICTIONARY_VERSION>`. Make a note of the `<UNIQUE_DICTIONARY_ID>` as shown. 
+
+    ![](images/regulardictionary.png)
+
+>Note: The `<UNIQUE_DICTIONARY_ID>` will be used to package the elements of the chatbot, so please make a note of it.
+
+### Step 4.2: Create behavior rules
+
+*Behavior rules* are are a series of defined rules by the developer of the bot. These rules are used to answer to the queries asked by the user.
+
+To create behavior rules, you will make a `POST` to `<eddi-url>/behaviorstore/behaviorsets` with a JSON file in the body as follows.
+
+>Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
+
+In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Make sure you select the following parameters:
+    
+   1. Select the request type to be `POST`
+   2. Select `Body`
+   3. Select `raw`
+   4. Select type as `JSON`
+   5. Copy and paste the JSON body given below
+    
+        ```json
+        {
+            "behaviorGroups": [
+                {
+                    "name": "Smalltalk",
+                    "behaviorRules": [
+                        {
+                            "name": "Welcome",
+                            "actions": [
+                                "welcome"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "occurrence",
+                                    "configs": {
+                                        "maxTimesOccurred": "0",
+                                        "behaviorRuleName": "Welcome"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Greeting",
+                            "actions": [
+                                "greet"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "greeting(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Taketest",
+                            "actions": [
+                                "taketest"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "taketest(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Symptom 1",
+                            "actions": [
+                                "symptomone",
+                                "CONVERSATION_END"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "symptomone(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Safe",
+                            "actions": [
+                                "safe",
+                                "CONVERSATION_END"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "safe(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Semi Safe",
+                            "actions": [
+                                "semisafe",
+                                "CONVERSATION_END"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "semisafe(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Semi Risk",
+                            "actions": [
+                                "semirisk",
+                                "CONVERSATION_END"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "semirisk(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Symptom 2",
+                            "actions": [
+                                "symptomtwo"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "symptomtwo(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Symptom 2a",
+                            "actions": [
+                                "symptomtwoa"
+                           ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "symptomtwoa(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Symptom 2b",
+                            "actions": [
+                                "symptomtwob"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "symptomtwob(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Symptom 2c",
+                            "actions": [
+                                "symptomtwoc"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "symptomtwoc(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Symptom 3",
+                            "actions": [
+                                "symptomthree"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "symptomthree(*)",
+                                        "occurrence": "currentStep"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Goodbye",
+                            "actions": [
+                                "say_goodbye",
+                                "CONVERSATION_END"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "goodbye(*)"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Thank",
+                            "actions": [
+                                "thank"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "thank(*)"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "how are you",
+                            "actions": [
+                                "how_are_you"
+                            ],
+                            "conditions": [
+                                {
+                                    "type": "inputmatcher",
+                                    "configs": {
+                                        "expressions": "how_are_you"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+        ```
+    
+   6. Click the **Send** button to make the request. If your request is successful, you will see a status: `201 Created` in your postman.
+   7. Click on the `Headers` to view the response.
+   8. You can see a `Location` header with a URL something like `eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>`. Make a note of the `<UNIQUE_BEHAVIOR_ID>` as shown. 
+
+    ![](images/behaviourrules.png)
 
 >Note: The `<UNIQUE_BEHAVIOR_ID>` will be used in Packaging, please make a note of it.
 
-#### Step 4.3: Create Output Sets
+### Step 4.3: Create output sets
 
-- Output is defined to answer the users request based on the results from the behavior rule execution.
+*Output* is defined to answer the users' request based on the results from the behavior rule execution.
 
-- Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as follows.
+Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
+>Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
 - In Postman, enter the `<eddi-url>` followed by `/outputstore/outputsets`, make sure you select the following parameters:
     1. Select the request type to be `POST`
@@ -541,6 +534,7 @@ spec:
     3. Select `raw`
     4. Select type as `JSON`
     5. Copy and paste the JSON body given below
+    
     ```json
     {
         "outputSet": [
@@ -873,30 +867,32 @@ spec:
         ]
     }
     ```
-    - Click on `Send` button to make request
-    - On successful request you can see a status: `201 Created` in your postman
-    6. Click on the `Headers` to view the response
-    7. You can see a `Location` header with a URL something like `eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>`. Make a note of the `<UNIQUE_OUTPUTSET_ID>` as shown. 
+    
+    6. Click the **Send** button to make request. On successful requests, you can see a status: `201 Created` in your Postman.
+    7. Click on the `Headers` to view the response
+    8. You can see a `Location` header with a URL something like `eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>`. Make a note of the `<UNIQUE_OUTPUTSET_ID>` as shown. 
 
-![](doc/source/images/outputset.png)
+![](images/outputset.png)
 
 >Note: The `<UNIQUE_OUTPUTSET_ID>` will be used in Packaging, please make a note of it.
 
-#### Step 4.4: Packaging
+### Step 4.4: Packaging
 
-- Now we will align the just created `Tasks` in the Package.
+Now that you've created the dictionary, behavior rules, and output sets, you should align them in the package.
 
-- Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
+Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
+>Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-- In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
-    1. Select the request type to be `POST`
-    2. Select `Body`
-    3. Select `raw`
-    4. Select type as `JSON`
-    5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
-    ```json
+In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
+    
+   1. Select the request type to be `POST`
+   2. Select `Body`
+   3. Select `raw`
+   4. Select type as `JSON`
+   5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
+   
+   ```json
     {
     "packageExtensions": [
         {
@@ -964,30 +960,33 @@ spec:
     ]
     }
     ```
-    - Click on `Send` button to make request
-    - On successful request you can see a status: `201 Created` in your postman
-    6. Click on the `Headers` to view the response
-    7. You can see a `Location` header with a URL something like `eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>`. Make a note of the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` as shown.
+    
+    6. Click the **Send** button to make a request. If it succeeds, you should see a status: `201 Created` in your postman
+    7. Click on the `Headers` to view the response
+    8. You can see a `Location` header with a URL something like `eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>`. 
+    Make a note of the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` as shown.
 
-![](doc/source/images/package.png)
+    ![](images/package.png)
 
 >Note: The `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` will be used in creating a Bot, please make a note of it.
 
-#### Step 4.5: Create a Bot
+### Step 4.5: Create a chatbot
 
-- Finally we build a Bot to align different Packages and Channels.
+Now it's time to build a chatbot that will use the different packages and channels.
 
-- Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
+`POST` to `<eddi-url>/packagestore/packages` with a JSON file in the body as follows.
 
->NOTE: You will have the `<eddi-url>` generated in [step 1](#step-1-install-the-eddi-operator-from-red-hat-marketplace-on-openshift-cluster).
+>Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-- In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
+In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
+    
     1. Select the request type to be `POST`
     2. Select `Body`
     3. Select `raw`
     4. Select type as `JSON`
-    5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4
-    ```json
+    5. Copy and paste the JSON body below, replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4.
+   
+   ```json
     {
     "packages": [
     "eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>"
@@ -995,64 +994,64 @@ spec:
     "channels": []
     }
     ```
-    - Click on `Send` button to make request
-    - On successful request you can see a status: `201 Created` in your postman
-    6. Click on the `Headers` to view the response
-    7. You can see a `Location` header with a URL something like `eddi://ai.labs.bot/botstore/bots/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`. Make a note of the `<UNIQUE_BOT_ID>` and `<BOT_VERSION>` as shown.
+    
+    6. Click the **Send** button to make the request. Once your request succeeds, you will see a status message that says: `201 Created` in your Postman.
+    7. Click on the `Headers` to view the response.
+    8. You can see a `Location` header with a URL. The URL will be similar to this: `eddi://ai.labs.bot/botstore/bots/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`. Make a note of the `<UNIQUE_BOT_ID>` and `<BOT_VERSION>`.
 
-![](doc/source/images/createbot.png)
+    ![](images/createbot.png)
 
 >Note: The `<UNIQUE_BOT_ID>` and `<BOT_VERSION>` will be used to check the status of the Bot, please make a note of it.
 
-#### Step 4.6: Check the status of Deployment
+### Step 4.6: Check the status of the deployment
 
-- To check the deployment status of the chatbot, make a `GET` API call to `<eddi-url>/administration/unrestricted/deploymentstatus/<UNIQUE_BOT_ID>?version=<BOT_VERSION>` as shown.
+To check the deployment status of the chatbot, make a `GET` API call to `<eddi-url>/administration/unrestricted/deploymentstatus/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`.
 
-![](doc/source/images/deploymentstatus.png)
+    ![](images/deploymentstatus.png)
 
-- `NOT_FOUND`, `IN_PROGRESS`, `ERROR` and `READY` is what you can expect to be returned in the body.
+You can expect a `NOT_FOUND`, `IN_PROGRESS`, `ERROR` and `READY` message to be returned in the body.
 
-- As soon as the Bot is deployed and has `READY` status we can invoke it and start using.
+As soon as the chatbot is deployed and has a `READY` status, you can invoke it and start using it.
 
-### Step 5: Access the E.D.D.I Dashboard to manage the chatbot
+## Step 5: Access the E.D.D.I Dashboard to manage the chatbot
 
-- Let us view the results of the commands we ran in the earlier steps via the `E.D.D.I Dashboard`. The Dashboard can be accessed by visiting the URL obtained in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
+1. To see the results of the commands you ran in the earlier steps, access the E.D.D.I dashboard using the URL you obtained in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
-- In the dashboard click on `Go to Bot Manager` as shown.
+1. In the dashboard, click on **Go to Bot Manager** as shown.
 
-![](doc/source/images/eddidashboard.png)
+    ![](images/eddidashboard.png)
 
-- In the Bot Manager you can see the Conversation ID of the chatbot that you deployed through API calls.
+1. In the Bot Manager in your E.D.D.I dashboard, you can see the Conversation ID of the chatbot that you deployed through API calls.
 
-![](doc/source/images/dashboard2.png)
+    ![](images/dashboard2.png)
 
-- Lets rename the Chatbot to avoid ambiguity, click on the three dot menu and select `rename`.
+1. Rename the chatbot to avoid ambiguity. Click on the three-dot menu and select **Rename**.
 
-![](doc/source/images/renamebot.png)
+    ![](images/renamebot.png)
 
-- Give the chatbot a meaningful name such as `Covid19 helth check chatbot` and save it.
+1. Give the chatbot a meaningful name such as `Covid19 helth check chatbot` and save it.
 
-![](doc/source/images/rename2.png)
+    ![](images/rename2.png)
 
-- Finally to interact with the chatbot click on `Open Chat` as shown.
+1. Finally to interact with the chatbot, click **Open Chat**.
 
-![](doc/source/images/openchatbot.png)
+    ![](images/openchatbot.png)
 
-### Step 6: Explore the Chatbot
+## Step 6: Explore the chatbot
 
-- You can see the chatbot in action once you are in the chat window as shown.
+You can see the chatbot in action once you are in the chat window.
 
-![](doc/source/images/sample-output.png)
+     ![](images/sample-output.png)
 
-- The chatbot ask you a set of standard questions to assess your risk of getting infected to COVID-19. You can answer the questions to self assess yourself or share the link with your family and friends to help them take the assessment.
+The chatbot asks you a set of standard questions to assess your risk of getting infected to COVID-19. You can answer the questions to self assess yourself or share the link with your family and friends to help them take the assessment.
 
 ![](doc/source/images/sample-output2.png)
 
-# Summary
+## Summary
 
 We learn't how to create a chatbot with E.D.D.I Operator hosted on Red Hat Marketplace.
 
-# Reference
+## Reference
 
 You can refer the following documentation from [E.D.D.I labs](https://docs.labs.ai/) to learn more about the operator and its features.
 
