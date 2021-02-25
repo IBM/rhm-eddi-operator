@@ -105,7 +105,15 @@ To complete the steps in this tutorial, you need the following installed:
 1. [Configure a Red Hat OpenShift Cluster with Red Hat Marketplace](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace)
 1. [Deploy a E.D.D.I operator to an OpenShift cluster](#step-2-deploy-the-eddi-operator-to-an-openshift-cluster)
 1. [Create an instance](#step-3-create-an-instance)
-1. [Create a chatbot in E.D.D.I](#step-4-creat-a-chatbot-in-eddi)
+1. [Create a chatbot in E.D.D.I](#step-4-create-a-chatbot-in-eddi)
+
+    1. [Create a regular dictionary](#step-41-create-a-regular-dictionary)
+    2. [Create behavior rules](#step-42-create-behavior-rules)
+    3. [Create output set](#step-43-create-output-sets)
+    4. [Packaging](#step-44-packaging)
+    5. [Create a chatbot](#step-45-create-a-chatbot)
+    6. [Check the status of the deployment](#step-46-check-the-status-of-the-deployment)
+
 1. [Access the E.D.D.I Dashboard to manage the chatbot](#step-5-access-the-eddi-dashboard-to-manage-the-chatbot)
 1. [Explore the chatbot](#step-6-explore-the-chatbot)
 
