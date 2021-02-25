@@ -102,12 +102,12 @@ To complete the steps in this tutorial, you need the following installed:
 
 ## Steps
 
-1. [Configure a Red Hat OpenShift Cluster with Red Hat Marketplace](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace)
-1. [Deploy a E.D.D.I operator to an OpenShift cluster](#-step-2-deploy-a-eddi-operator-to-an-openshift-cluster)
-1. [Create an instance](#-step-3-create-an-instance)
-1. [Create a chatbot in E.D.D.I](#-step-4-creat-a-chatbot-in-eddi)
-1. [Access the E.D.D.I Dashboard to manage the chatbot](#-step-5-access-the-eddi-dashboard-to-manage-the-chatbot)
-1. [Explore the chatbot](#-step-6-explore-the-chatbot)
+1. [Configure a Red Hat OpenShift Cluster with Red Hat Marketplace](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace)
+1. [Deploy a E.D.D.I operator to an OpenShift cluster](#step-2-deploy-a-eddi-operator-to-an-openshift-cluster)
+1. [Create an instance](#step-3-create-an-instance)
+1. [Create a chatbot in E.D.D.I](#step-4-creat-a-chatbot-in-eddi)
+1. [Access the E.D.D.I Dashboard to manage the chatbot](#step-5-access-the-eddi-dashboard-to-manage-the-chatbot)
+1. [Explore the chatbot](#step-6-explore-the-chatbot)
 
 ## Step 1. Configure a Red Hat OpenShift Cluster with Red Hat Marketplace
 
@@ -196,7 +196,7 @@ In order to build a Chatbot with E.D.D.I, you will have to create a few configur
 
 - Make a `POST` to `<eddi-url>/regulardictionarystore/regulardictionaries` with a JSON file in the body as follows.
 
->Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
+>Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
 In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`. Make sure you select the following parameters:
     
@@ -263,7 +263,7 @@ In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulard
 
 To create behavior rules, you will make a `POST` to `<eddi-url>/behaviorstore/behaviorsets` with a JSON file in the body as follows.
 
->Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
+>Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
 In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Make sure you select the following parameters:
     
@@ -526,7 +526,7 @@ In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Ma
 
 Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as follows.
 
->Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
+>Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
 - In Postman, enter the `<eddi-url>` followed by `/outputstore/outputsets`, make sure you select the following parameters:
     1. Select the request type to be `POST`
@@ -882,7 +882,7 @@ Now that you've created the dictionary, behavior rules, and output sets, you sho
 
 Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
 
->Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
+>Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
 In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
     
