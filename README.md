@@ -891,75 +891,74 @@ In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make su
    3. Select `raw`
    4. Select type as `JSON`
    5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
-   
-   ```json
+```json
+{
+"packageExtensions": [
     {
-    "packageExtensions": [
+    "type": "eddi://ai.labs.parser",
+    "extensions": {
+        "dictionaries": [
         {
-        "type": "eddi://ai.labs.parser",
-        "extensions": {
-            "dictionaries": [
-            {
-                "type": "eddi://ai.labs.parser.dictionaries.integer"
-            },
-            {
-                "type": "eddi://ai.labs.parser.dictionaries.decimal"
-            },
-            {
-                "type": "eddi://ai.labs.parser.dictionaries.punctuation"
-            },
-            {
-                "type": "eddi://ai.labs.parser.dictionaries.email"
-            },
-            {
-                "type": "eddi://ai.labs.parser.dictionaries.time"
-            },
-            {
-                "type": "eddi://ai.labs.parser.dictionaries.ordinalNumber"
-            },
-            {
-                "type": "eddi://ai.labs.parser.dictionaries.regular",
-                "config": {
-                "uri": "eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<DICTIONARY_VERSION>"
-                }
+            "type": "eddi://ai.labs.parser.dictionaries.integer"
+        },
+        {
+            "type": "eddi://ai.labs.parser.dictionaries.decimal"
+        },
+        {
+            "type": "eddi://ai.labs.parser.dictionaries.punctuation"
+        },
+        {
+            "type": "eddi://ai.labs.parser.dictionaries.email"
+        },
+        {
+            "type": "eddi://ai.labs.parser.dictionaries.time"
+        },
+        {
+            "type": "eddi://ai.labs.parser.dictionaries.ordinalNumber"
+        },
+        {
+            "type": "eddi://ai.labs.parser.dictionaries.regular",
+            "config": {
+            "uri": "eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<DICTIONARY_VERSION>"
             }
-            ],
-            "corrections": [
-            {
-                "type": "eddi://ai.labs.parser.corrections.stemming",
-                "config": {
-                "language": "english",
-                "lookupIfKnown": "false"
-                }
-            },
-            {
-                "type": "eddi://ai.labs.parser.corrections.levenshtein",
-                "config": {
-                "distance": "2"
-                }
-            },
-            {
-                "type": "eddi://ai.labs.parser.corrections.mergedTerms"
+        }
+        ],
+        "corrections": [
+        {
+            "type": "eddi://ai.labs.parser.corrections.stemming",
+            "config": {
+            "language": "english",
+            "lookupIfKnown": "false"
             }
-            ]
-        },
-        "config": {}
         },
         {
-        "type": "eddi://ai.labs.behavior",
-        "config": {
-            "uri": "eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>"
-        }
+            "type": "eddi://ai.labs.parser.corrections.levenshtein",
+            "config": {
+            "distance": "2"
+            }
         },
         {
-        "type": "eddi://ai.labs.output",
-        "config": {
-            "uri": "eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>"
+            "type": "eddi://ai.labs.parser.corrections.mergedTerms"
         }
-        }
-    ]
+        ]
+    },
+    "config": {}
+    },
+    {
+    "type": "eddi://ai.labs.behavior",
+    "config": {
+        "uri": "eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>"
     }
-    ```
+    },
+    {
+    "type": "eddi://ai.labs.output",
+    "config": {
+        "uri": "eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>"
+    }
+    }
+]
+}
+```
     
     6. Click the **Send** button to make a request. If it succeeds, you should see a status: `201 Created` in your postman
     7. Click on the `Headers` to view the response
