@@ -119,35 +119,35 @@ Follow these steps to deploy the E.D.D.I operator to an OpenShift cluster.
 
 1. Visit the [Red Hat Marketplace catalog](https://marketplace.redhat.com/en-us) and search for "E.D.D.I". Select `E.D.D.I` from the results as shown.
 
-    ![rhm](images/rhmeddi.png)
+    ![rhm](doc/source/images/rhmeddi.png)
 
 1. The E.D.D.I product page gives you an overview, documentation, and pricing options associated with the product. Click the **Free Trial** button.
 
-    ![rhm-freetrial](images/rhmeddifreetrial.png)
+    ![rhm-freetrial](doc/source/images/rhmeddifreetrial.png)
 
 1. Next, the purchase summary will show the `Subscription term` and total cost is $0.00. Click **Start trial**.
 
-    ![rhm-starttrial](images/rhmstarttrial.png)
+    ![rhm-starttrial](doc/source/images/rhmstarttrial.png)
 
     > You can visit [Workspace > My Software](https://marketplace.redhat.com/en-us/workspace/software) to view your list of purchased software.
 
 1. Back in the web dashboard, select the E.D.D.I tile and click the **Operators tab**. Select the **Install Operator** button. Leave the default selection for Update channel and Approval strategy. Select the cluster and namespace scope as `eddi-project` for the operator, and click **Install**.
 
-    ![rhm-installoperator](images/rhminstalloperator.png)
+    ![rhm-installoperator](doc/source/images/rhminstalloperator.png)
 
 1. You should see a message like the one below at the top of your screen, indicating the install process initiated in the cluster.
 
-    ![rhm-successmsg](images/rhmsuccessmsg.png)
+    ![rhm-successmsg](doc/source/images/rhmsuccessmsg.png)
 
 ## Step 3: Create an instance
 
 1. Log into your OpenShift cluster. From the left navigation, click **Operators** and select **Installed Operators** to confirm the installation was successful. You should see the E.D.D.I Operator listed under the project/namespace `eddi-project`.
 
-    ![ocp-installedoperators](images/ocpinstalledoperators.png)
+    ![ocp-installedoperators](doc/source/images/ocpinstalledoperators.png)
 
 1. On the E.D.D.I. operator screen, navigate to Provided APIs and select the first **Create Instance**.
 
-    ![ocp-createdbinstance](images/ocpcreateinstance.png)
+    ![ocp-createdbinstance](doc/source/images/ocpcreateinstance.png)
 
 1. The E.D.D.I page displays with the default YAML. Edit the `storageclass_name` in the YAML file and click on the **Create** button. If the default YAML file is not visiblie, you can copy paste the bellow YAML file replacing the `storageclass_name`.
 
@@ -164,17 +164,17 @@ Follow these steps to deploy the E.D.D.I operator to an OpenShift cluster.
         storage_size: 20G
     ```
 
-    ![ocp-createyaml](images/ocpcreateyml.png)
+    ![ocp-createyaml](doc/source/images/ocpcreateyml.png)
 
     E.D.D.I Operator pods should come up when the installation is completed.
 
 1. Under the left panel, select **Networking > Routes**. Make sure you are in the `eddi-project` namesapace. You should now see the `eddi-route` with a URL like the following: 
 
-    ![ocp-routes](images/ocproutes.png)
+    ![ocp-routes](doc/source/images/ocproutes.png)
 
 1. You can now visit the URL to access the E.D.D.I Dashboard.
 
-    ![ocp-eddidashboard](images/eddidashboard.png)
+    ![ocp-eddidashboard](doc/source/images/eddidashboard.png)
 
 ## Step 4: Create a chatbot in E.D.D.I
 
@@ -872,7 +872,7 @@ Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as 
     7. Click on the `Headers` to view the response
     8. You can see a `Location` header with a URL something like `eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>`. Make a note of the `<UNIQUE_OUTPUTSET_ID>` as shown. 
 
-![](images/outputset.png)
+![](doc/source/images/outputset.png)
 
 >Note: The `<UNIQUE_OUTPUTSET_ID>` will be used in Packaging, please make a note of it.
 
