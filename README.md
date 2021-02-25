@@ -983,22 +983,21 @@ In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make su
     2. Select `Body`
     3. Select `raw`
     4. Select type as `JSON`
-    5. Copy and paste the JSON body below, replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4.
-   
-   ```json
-    {
-    "packages": [
-    "eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>"
-    ],
-    "channels": []
-    }
-    ```
+    5. Copy and paste the JSON body below, replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4.   
+```json
+{
+"packages": [
+"eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>"
+],
+"channels": []
+}
+```
     
     6. Click the **Send** button to make the request. Once your request succeeds, you will see a status message that says: `201 Created` in your Postman.
     7. Click on the `Headers` to view the response.
     8. You can see a `Location` header with a URL. The URL will be similar to this: `eddi://ai.labs.bot/botstore/bots/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`. Make a note of the `<UNIQUE_BOT_ID>` and `<BOT_VERSION>`.
 
-    ![](images/createbot.png)
+    ![](doc/source/images/createbot.png)
 
 >Note: The `<UNIQUE_BOT_ID>` and `<BOT_VERSION>` will be used to check the status of the Bot, please make a note of it.
 
@@ -1018,29 +1017,29 @@ As soon as the chatbot is deployed and has a `READY` status, you can invoke it a
 
 1. In the dashboard, click on **Go to Bot Manager** as shown.
 
-    ![](images/eddidashboard.png)
+    ![](doc/source/images/eddidashboard.png)
 
 1. In the Bot Manager in your E.D.D.I dashboard, you can see the Conversation ID of the chatbot that you deployed through API calls.
 
-    ![](images/dashboard2.png)
+    ![](doc/source/images/dashboard2.png)
 
 1. Rename the chatbot to avoid ambiguity. Click on the three-dot menu and select **Rename**.
 
-    ![](images/renamebot.png)
+    ![](doc/source/images/renamebot.png)
 
 1. Give the chatbot a meaningful name such as `Covid19 helth check chatbot` and save it.
 
-    ![](images/rename2.png)
+    ![](doc/source/images/rename2.png)
 
 1. Finally to interact with the chatbot, click **Open Chat**.
 
-    ![](images/openchatbot.png)
+    ![](doc/source/images/openchatbot.png)
 
 ## Step 6: Explore the chatbot
 
 You can see the chatbot in action once you are in the chat window.
 
-     ![](images/sample-output.png)
+     ![](doc/source/images/sample-output.png)
 
 The chatbot asks you a set of standard questions to assess your risk of getting infected to COVID-19. You can answer the questions to self assess yourself or share the link with your family and friends to help them take the assessment.
 
