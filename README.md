@@ -180,7 +180,7 @@ Follow these steps to deploy the E.D.D.I operator to an OpenShift cluster.
 
 Now, let's create a chatbot in E.D.D.I from scratch.
 
-To create a chatbot, you will complete these steps:
+- To create a chatbot, you will have to complete these steps:
 
 1. Create a regular dictionary
 1. Create behavior rules
@@ -188,7 +188,7 @@ To create a chatbot, you will complete these steps:
 1. Package your dictionary, rules, and sets
 1. Create a chatbot
 
-In order to build a Chatbot with E.D.D.I, you will have to create a few configuration files and POST them to the corresponding REST APIs. You can use tools like [Postman](https://www.postman.com/downloads/) to make the API calls.
+- In order to build a Chatbot with E.D.D.I, you will have to create a few configuration files and POST them to the corresponding REST APIs. You can use tools like [Postman](https://www.postman.com/downloads/) to make the API calls.
 
 ### Step 4.1: Create a regular dictionary
 
@@ -198,62 +198,60 @@ In order to build a Chatbot with E.D.D.I, you will have to create a few configur
 
 >Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`. Make sure you select the following parameters:
+- In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulardictionaries`. Make sure you select the following parameters:
     
    1. Select the request type to be `POST`
    2. Select `Body`
    3. Select `raw`
    4. Select type as `JSON`
    5. Copy and paste the JSON body given below
-    
-        ```json
-        {
-            "words": [
-                {
-                    "word": "hello",
-                    "expressions": "greeting(hello)",
-                    "frequency": 0
-                },
-                {
-                    "word": "hi",
-                    "expressions": "greeting(hi)",
-                    "frequency": 0
-                },
-                {
-                    "word": "bye",
-                    "expressions": "goodbye(bye)",
-                    "frequency": 0
-                },
-                {
-                    "word": "take test",
-                    "expressions": "taketest(yes)",
-                    "frequency": 0
-                },
-                {
-                    "word": "thanks",
-                    "expressions": "thanks(thanks)",
-                    "frequency": 0
-                }
-            ],
-            "regExs": [],
-            "phrases": [
-                {
-                    "phrase": "good afternoon",
-                    "expressions": "greeting(good_afternoon)"
-                },
-                {
-                    "phrase": "how are you",
-                    "expressions": "how_are_you"
-                }
-            ]
-        }
-        ```
-    
+    ```json
+    {
+        "words": [
+            {
+                "word": "hello",
+                "expressions": "greeting(hello)",
+                "frequency": 0
+            },
+            {
+                "word": "hi",
+                "expressions": "greeting(hi)",
+                "frequency": 0
+            },
+            {
+                "word": "bye",
+                "expressions": "goodbye(bye)",
+                "frequency": 0
+            },
+            {
+                "word": "take test",
+                "expressions": "taketest(yes)",
+                "frequency": 0
+            },
+            {
+                "word": "thanks",
+                "expressions": "thanks(thanks)",
+                "frequency": 0
+            }
+        ],
+        "regExs": [],
+        "phrases": [
+            {
+                "phrase": "good afternoon",
+                "expressions": "greeting(good_afternoon)"
+            },
+            {
+                "phrase": "how are you",
+                "expressions": "how_are_you"
+            }
+        ]
+    }
+    ```
    6. Click the **Send** button to make the request. If your request is sucessful, you will see a status: `201 Created` in your postman.
    7. Click on the `Headers` to view the response
    8. You can see a `Location` header with a URL something like `eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<UNIQUE_DICTIONARY_VERSION>`. Make a note of the `<UNIQUE_DICTIONARY_ID>` as shown. 
 
-    ![](images/regulardictionary.png)
+    ![](doc/source/images/regulardictionary.png)
 
 >Note: The `<UNIQUE_DICTIONARY_ID>` will be used to package the elements of the chatbot, so please make a note of it.
 
@@ -261,11 +259,11 @@ In Postman, enter the `<eddi-url>` followed by `/regulardictionarystore/regulard
 
 *Behavior rules* are are a series of defined rules by the developer of the bot. These rules are used to answer to the queries asked by the user.
 
-To create behavior rules, you will make a `POST` to `<eddi-url>/behaviorstore/behaviorsets` with a JSON file in the body as follows.
+- To create behavior rules, you will make a `POST` to `<eddi-url>/behaviorstore/behaviorsets` with a JSON file in the body as follows.
 
 >Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Make sure you select the following parameters:
+- In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Make sure you select the following parameters:
     
    1. Select the request type to be `POST`
    2. Select `Body`
@@ -273,244 +271,244 @@ In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Ma
    4. Select type as `JSON`
    5. Copy and paste the JSON body given below
     
-        ```json
-        {
-            "behaviorGroups": [
-                {
-                    "name": "Smalltalk",
-                    "behaviorRules": [
-                        {
-                            "name": "Welcome",
-                            "actions": [
-                                "welcome"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "occurrence",
-                                    "configs": {
-                                        "maxTimesOccurred": "0",
-                                        "behaviorRuleName": "Welcome"
-                                    }
+    ```json
+    {
+        "behaviorGroups": [
+            {
+                "name": "Smalltalk",
+                "behaviorRules": [
+                    {
+                        "name": "Welcome",
+                        "actions": [
+                            "welcome"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "occurrence",
+                                "configs": {
+                                    "maxTimesOccurred": "0",
+                                    "behaviorRuleName": "Welcome"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Greeting",
-                            "actions": [
-                                "greet"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "greeting(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Greeting",
+                        "actions": [
+                            "greet"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "greeting(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Taketest",
-                            "actions": [
-                                "taketest"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "taketest(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Taketest",
+                        "actions": [
+                            "taketest"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "taketest(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Symptom 1",
-                            "actions": [
-                                "symptomone",
-                                "CONVERSATION_END"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "symptomone(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Symptom 1",
+                        "actions": [
+                            "symptomone",
+                            "CONVERSATION_END"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "symptomone(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Safe",
-                            "actions": [
-                                "safe",
-                                "CONVERSATION_END"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "safe(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Safe",
+                        "actions": [
+                            "safe",
+                            "CONVERSATION_END"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "safe(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Semi Safe",
-                            "actions": [
-                                "semisafe",
-                                "CONVERSATION_END"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "semisafe(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Semi Safe",
+                        "actions": [
+                            "semisafe",
+                            "CONVERSATION_END"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "semisafe(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Semi Risk",
-                            "actions": [
-                                "semirisk",
-                                "CONVERSATION_END"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "semirisk(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Semi Risk",
+                        "actions": [
+                            "semirisk",
+                            "CONVERSATION_END"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "semirisk(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Symptom 2",
-                            "actions": [
-                                "symptomtwo"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "symptomtwo(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Symptom 2",
+                        "actions": [
+                            "symptomtwo"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "symptomtwo(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Symptom 2a",
-                            "actions": [
-                                "symptomtwoa"
-                           ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "symptomtwoa(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Symptom 2a",
+                        "actions": [
+                            "symptomtwoa"
+                       ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "symptomtwoa(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Symptom 2b",
-                            "actions": [
-                                "symptomtwob"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "symptomtwob(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Symptom 2b",
+                        "actions": [
+                            "symptomtwob"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "symptomtwob(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Symptom 2c",
-                            "actions": [
-                                "symptomtwoc"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "symptomtwoc(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Symptom 2c",
+                        "actions": [
+                            "symptomtwoc"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "symptomtwoc(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Symptom 3",
-                            "actions": [
-                                "symptomthree"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "symptomthree(*)",
-                                        "occurrence": "currentStep"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Symptom 3",
+                        "actions": [
+                            "symptomthree"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "symptomthree(*)",
+                                    "occurrence": "currentStep"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Goodbye",
-                            "actions": [
-                                "say_goodbye",
-                                "CONVERSATION_END"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "goodbye(*)"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Goodbye",
+                        "actions": [
+                            "say_goodbye",
+                            "CONVERSATION_END"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "goodbye(*)"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "Thank",
-                            "actions": [
-                                "thank"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "thank(*)"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Thank",
+                        "actions": [
+                            "thank"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "thank(*)"
                                 }
-                            ]
-                        },
-                        {
-                            "name": "how are you",
-                            "actions": [
-                                "how_are_you"
-                            ],
-                            "conditions": [
-                                {
-                                    "type": "inputmatcher",
-                                    "configs": {
-                                        "expressions": "how_are_you"
-                                    }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "how are you",
+                        "actions": [
+                            "how_are_you"
+                        ],
+                        "conditions": [
+                            {
+                                "type": "inputmatcher",
+                                "configs": {
+                                    "expressions": "how_are_you"
                                 }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-        ```
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+    ```
     
    6. Click the **Send** button to make the request. If your request is successful, you will see a status: `201 Created` in your postman.
    7. Click on the `Headers` to view the response.
@@ -524,7 +522,7 @@ In Postman, enter the `<eddi-url>` followed by `/behaviorstore/behaviorsets`. Ma
 
 *Output* is defined to answer the users' request based on the results from the behavior rule execution.
 
-Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as follows.
+- Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as follows.
 
 >Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
@@ -872,7 +870,7 @@ Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as 
     7. Click on the `Headers` to view the response
     8. You can see a `Location` header with a URL something like `eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>`. Make a note of the `<UNIQUE_OUTPUTSET_ID>` as shown. 
 
-![](doc/source/images/outputset.png)
+    ![](doc/source/images/outputset.png)
 
 >Note: The `<UNIQUE_OUTPUTSET_ID>` will be used in Packaging, please make a note of it.
 
@@ -880,92 +878,92 @@ Make a `POST` to `<eddi-url>/outputstore/outputsets` with a JSON in the body as 
 
 Now that you've created the dictionary, behavior rules, and output sets, you should align them in the package.
 
-Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
+- Make a `POST` to `<eddi-url>/packagestore/packages` with a JSON in the body as follows.
 
 >Note: You will use the `<eddi-url>` generated in [step 1](#step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
+- In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
     
    1. Select the request type to be `POST`
    2. Select `Body`
    3. Select `raw`
    4. Select type as `JSON`
    5. Copy and paste the JSON body given below replacing it with the `<UNIQUE_DICTIONARY_ID>`, `<UNIQUE_BEHAVIOR_ID>` and `<UNIQUE_OUTPUTSET_ID>` copied from step 2.1, step 2.2 and step 2.3
-```json
-{
-"packageExtensions": [
+    ```json
     {
-    "type": "eddi://ai.labs.parser",
-    "extensions": {
-        "dictionaries": [
+    "packageExtensions": [
         {
-            "type": "eddi://ai.labs.parser.dictionaries.integer"
-        },
-        {
-            "type": "eddi://ai.labs.parser.dictionaries.decimal"
-        },
-        {
-            "type": "eddi://ai.labs.parser.dictionaries.punctuation"
-        },
-        {
-            "type": "eddi://ai.labs.parser.dictionaries.email"
-        },
-        {
-            "type": "eddi://ai.labs.parser.dictionaries.time"
-        },
-        {
-            "type": "eddi://ai.labs.parser.dictionaries.ordinalNumber"
-        },
-        {
-            "type": "eddi://ai.labs.parser.dictionaries.regular",
-            "config": {
-            "uri": "eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<DICTIONARY_VERSION>"
+        "type": "eddi://ai.labs.parser",
+        "extensions": {
+            "dictionaries": [
+            {
+                "type": "eddi://ai.labs.parser.dictionaries.integer"
+            },
+            {
+                "type": "eddi://ai.labs.parser.dictionaries.decimal"
+            },
+            {
+                "type": "eddi://ai.labs.parser.dictionaries.punctuation"
+            },
+            {
+                "type": "eddi://ai.labs.parser.dictionaries.email"
+            },
+            {
+                "type": "eddi://ai.labs.parser.dictionaries.time"
+            },
+            {
+                "type": "eddi://ai.labs.parser.dictionaries.ordinalNumber"
+            },
+            {
+                "type": "eddi://ai.labs.parser.dictionaries.regular",
+                "config": {
+                "uri": "eddi://ai.labs.regulardictionary/regulardictionarystore/regulardictionaries/<UNIQUE_DICTIONARY_ID>?version=<DICTIONARY_VERSION>"
+                }
             }
+            ],
+            "corrections": [
+            {
+                "type": "eddi://ai.labs.parser.corrections.stemming",
+                "config": {
+                "language": "english",
+                "lookupIfKnown": "false"
+                }
+            },
+            {
+                "type": "eddi://ai.labs.parser.corrections.levenshtein",
+                "config": {
+                "distance": "2"
+                }
+            },
+            {
+                "type": "eddi://ai.labs.parser.corrections.mergedTerms"
+            }
+            ]
+        },
+        "config": {}
+        },
+        {
+        "type": "eddi://ai.labs.behavior",
+        "config": {
+            "uri": "eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>"
         }
-        ],
-        "corrections": [
-        {
-            "type": "eddi://ai.labs.parser.corrections.stemming",
-            "config": {
-            "language": "english",
-            "lookupIfKnown": "false"
-            }
         },
         {
-            "type": "eddi://ai.labs.parser.corrections.levenshtein",
-            "config": {
-            "distance": "2"
-            }
-        },
-        {
-            "type": "eddi://ai.labs.parser.corrections.mergedTerms"
+        "type": "eddi://ai.labs.output",
+        "config": {
+            "uri": "eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>"
         }
-        ]
-    },
-    "config": {}
-    },
-    {
-    "type": "eddi://ai.labs.behavior",
-    "config": {
-        "uri": "eddi://ai.labs.behavior/behaviorstore/behaviorsets/<UNIQUE_BEHAVIOR_ID>?version=<BEHAVIOR_VERSION>"
+        }
+    ]
     }
-    },
-    {
-    "type": "eddi://ai.labs.output",
-    "config": {
-        "uri": "eddi://ai.labs.output/outputstore/outputsets/<UNIQUE_OUTPUTSET_ID>?version=<OUTPUTSET_VERSION>"
-    }
-    }
-]
-}
-```
+    ```  
     
     6. Click the **Send** button to make a request. If it succeeds, you should see a status: `201 Created` in your postman
     7. Click on the `Headers` to view the response
     8. You can see a `Location` header with a URL something like `eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>`. 
     Make a note of the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` as shown.
 
-    ![](images/package.png)
+    ![](doc/source/images/package.png)
 
 >Note: The `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` will be used in creating a Bot, please make a note of it.
 
@@ -973,26 +971,25 @@ In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make su
 
 Now it's time to build a chatbot that will use the different packages and channels.
 
-`POST` to `<eddi-url>/packagestore/packages` with a JSON file in the body as follows.
+- `POST` to `<eddi-url>/packagestore/packages` with a JSON file in the body as follows.
 
 >Note: You will use the `<eddi-url>` generated in [step 1](#-step-1-configure-a-red-hat-openshift-cluster-with-red-hat-marketplace).
 
-In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
+- In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make sure you select the following parameters:
     
     1. Select the request type to be `POST`
     2. Select `Body`
     3. Select `raw`
     4. Select type as `JSON`
-    5. Copy and paste the JSON body below, replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4.   
-```json
-{
-"packages": [
-"eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>"
-],
-"channels": []
-}
-```
-    
+    5. Copy and paste the JSON body below, replacing it with the `<UNIQUE_PACKAGE_ID>` and `<PACKAGE_VERSION>` copied from step 2.4.  
+    ```json
+    {
+    "packages": [
+    "eddi://ai.labs.package/packagestore/packages/<UNIQUE_PACKAGE_ID>?version=<PACKAGE_VERSION>"
+    ],
+    "channels": []
+    }
+    ```
     6. Click the **Send** button to make the request. Once your request succeeds, you will see a status message that says: `201 Created` in your Postman.
     7. Click on the `Headers` to view the response.
     8. You can see a `Location` header with a URL. The URL will be similar to this: `eddi://ai.labs.bot/botstore/bots/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`. Make a note of the `<UNIQUE_BOT_ID>` and `<BOT_VERSION>`.
@@ -1003,17 +1000,17 @@ In Postman, enter the `<eddi-url>` followed by `/packagestore/packages`, make su
 
 ### Step 4.6: Check the status of the deployment
 
-To check the deployment status of the chatbot, make a `GET` API call to `<eddi-url>/administration/unrestricted/deploymentstatus/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`.
+- To check the deployment status of the chatbot, make a `GET` API call to `<eddi-url>/administration/unrestricted/deploymentstatus/<UNIQUE_BOT_ID>?version=<BOT_VERSION>`.
 
-    ![](images/deploymentstatus.png)
+    ![](doc/source/images/deploymentstatus.png)
 
-You can expect a `NOT_FOUND`, `IN_PROGRESS`, `ERROR` and `READY` message to be returned in the body.
+- You can expect a `NOT_FOUND`, `IN_PROGRESS`, `ERROR` and `READY` message to be returned in the body.
 
-As soon as the chatbot is deployed and has a `READY` status, you can invoke it and start using it.
+- As soon as the chatbot is deployed and has a `READY` status, you can invoke it and start using it.
 
 ## Step 5: Access the E.D.D.I Dashboard to manage the chatbot
 
-1. To see the results of the commands you ran in the earlier steps, access the E.D.D.I dashboard using the URL you obtained in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
+To see the results of the commands you ran in the earlier steps, access the E.D.D.I dashboard using the URL you obtained in [step 1](#step-1-install-the-e.d.d.i-operator-from-red-hat-marketplace-on-openshift-cluster).
 
 1. In the dashboard, click on **Go to Bot Manager** as shown.
 
@@ -1034,16 +1031,16 @@ As soon as the chatbot is deployed and has a `READY` status, you can invoke it a
 1. Finally to interact with the chatbot, click **Open Chat**.
 
     ![](doc/source/images/openchatbot.png)
-
+    
 ## Step 6: Explore the chatbot
 
-You can see the chatbot in action once you are in the chat window.
+- You can see the chatbot in action once you are in the chat window.
+    
+    ![](doc/source/images/sample-output.png)
 
-     ![](doc/source/images/sample-output.png)
+- The chatbot asks you a set of standard questions to assess your risk of getting infected to COVID-19. You can answer the questions to self assess yourself or share the link with your family and friends to help them take the assessment.
 
-The chatbot asks you a set of standard questions to assess your risk of getting infected to COVID-19. You can answer the questions to self assess yourself or share the link with your family and friends to help them take the assessment.
-
-![](doc/source/images/sample-output2.png)
+    ![](doc/source/images/sample-output2.png)
 
 ## Summary
 
